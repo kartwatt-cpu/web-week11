@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="计算机专业本科生的个人简历，展示专业技能、课程实践与学习计划，并包含用 React 组件与 State 重构、带双轨验证的待办事项应用。">
+    <title>个人简历 · Todo V4.0（React 重构）</title>
+</head>
+<body>
+    <header class="profile">
+        <img class="portrait" src="/头像.jpg" alt="个人头像：黑白动漫人物" width="160" height="160">
+        <div class="profile-copy">
+            <p class="eyebrow">计算机专业 · 本科在读</p>
+            <h1>王梓健</h1>
+            <p class="student-info">学号：2024150200 · Web编程第11周</p>
+            <p class="intro">我是计算机专业大三学生，系统学习过计算机专业核心课程，具备编程基础。关注自然语言处理与机器学习，也在学习如何用清晰的网页呈现项目和个人经历。</p>
+            <ul class="tag-list" aria-label="关注方向">
+                <li>自然语言处理</li><li>机器学习</li><li>Web 开发</li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 主区域在宽屏为内容区与侧栏，窄屏改为纵向排列。 -->
+    <main class="resume-layout">
+        <div class="resume-content">
+            <!-- Week 11: Todo 整块交给 React；页面只保留一个空容器，界面由 <TodoApp /> 用 JSX 描述。 -->
+            <section class="todo-section">
+                <div id="root"></div>
+            </section>
+
+            <section>
+                <div class="section-heading"><h2>专业技能</h2><p>从基础编程到应用实践</p></div>
+                <ul class="skill-list">
+                    <li><span class="item-number">01 / 编程基础</span><h3>Python 开发</h3><p>熟悉 Python 语法与常用数据结构，能够编写数据处理脚本，完成课程任务的代码实现。</p><ul class="tag-list"><li>Python</li><li>数据处理</li></ul></li>
+                    <li><span class="item-number">02 / 智能应用</span><h3>自然语言处理</h3><p>学习文本分析与模型训练基础，结合课程项目理解从文本输入到实验结果的处理流程。</p><ul class="tag-list"><li>文本分析</li><li>模型训练</li></ul></li>
+                    <li><span class="item-number">03 / 前端基础</span><h3>HTML 与 CSS</h3><p>使用语义化 HTML 组织内容，用 CSS 控制排版、颜色与响应式布局，关注不同屏幕上的可读性。</p><ul class="tag-list"><li>语义化</li><li>响应式</li></ul></li>
+                    <li><span class="item-number">04 / 算法学习</span><h3>机器学习基础</h3><p>了解常用算法，能够围绕数据预处理、模型训练与结果评估组织基础实验。</p><ul class="tag-list"><li>预处理</li><li>模型评估</li></ul></li>
+                    <li><span class="item-number">05 / 开发工具</span><h3>Git 版本管理</h3><p>使用 Git 管理代码变更，通过分支开发、多次提交与合并回主分支保存课程项目，改动有据可查。</p><ul class="tag-list"><li>Git</li><li>GitHub</li></ul></li>
+                    <li><span class="item-number">06 / 当前练习</span><h3>React 组件化与状态驱动</h3><p>把 Todo 拆成 TodoApp / TodoForm / TodoList / TodoItem 四层，用 useState 管数据、用 Props 与回调通信，并用单测回归与 UI 行为两条轨道验证迁移结果。</p><ul class="tag-list"><li>React</li><li>useState</li><li>Vitest</li></ul></li>
+                </ul>
+            </section>
+
+            <section class="projects-section">
+                <div class="section-heading"><h2>课程与项目</h2><p>把所学落到具体作品中</p></div>
+                <div class="project-list">
+                    <article class="project-card">
+                        <p class="item-number">课程项目 / NLP</p><h3>自然语言处理期末作业</h3>
+                        <p>围绕自然语言处理课程开展项目实践，相关实现保存在 GitHub 仓库中，可通过下方链接查看具体代码与说明。</p>
+                        <ul class="tag-list"><li>Python</li><li>自然语言处理</li></ul>
+                        <a class="project-action" href="https://github.com/kartwatt-cpu/WZJ_NLP_FINALHOMEWORK" target="_blank" rel="noopener noreferrer">查看项目仓库 <span>↗（新窗口）</span></a>
+                    </article>
+                    <article class="project-card">
+                        <p class="item-number">课程实践 / WEB</p><h3>个人简历 + Todo V4.0</h3>
+                        <p>第 5 周响应式简历、第 6 周手动 DOM、第 7 周数据驱动、第 8 周事件委托、第 9 周 TypeScript 与单测、第 10 周 Vite 工程化；本周把 Todo 重构为 React 组件，界面只由 Props 与 State 决定。</p>
+                        <ul class="tag-list"><li>React</li><li>JSX</li><li>Vitest</li></ul>
+                        <a class="project-action" href="style.css">查看本页样式源码 <span>→</span></a>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <aside class="resume-sidebar" aria-label="学习背景与计划">
+            <section class="sidebar-section">
+                <p class="eyebrow">ABOUT MY STUDY</p><h2>学习背景</h2>
+                <dl class="facts"><div><dt>专业方向</dt><dd>计算机专业</dd></div><div><dt>当前阶段</dt><dd>本科三年级</dd></div><div><dt>兴趣领域</dt><dd>自然语言处理、机器学习</dd></div><div><dt>当前课程</dt><dd>Web 编程</dd></div></dl>
+            </section>
+            <section class="sidebar-section">
+                <p class="eyebrow">ENGINEERING</p><h2>工程化状态</h2>
+                <dl class="facts">
+                    <div><dt>构建工具</dt><dd>Vite 5 + @vitejs/plugin-react</dd></div>
+                    <div><dt>类型检查</dt><dd>tsc --noEmit（strict）</dd></div>
+                    <div><dt>状态管理</dt><dd>useState（单向下传）</dd></div>
+                    <div><dt>行为回归</dt><dd>Vitest 22 条</dd></div>
+                </dl>
+                <p class="env-note">当前环境：<code class="env-mode">production</code></p>
+            </section>
+            <section class="sidebar-section">
+                <h2>近期学习计划</h2>
+                <ol class="plan-list">
+                    <li><h3>把 UI 写成 State 的函数</h3><p>先定 Props 形状，再写组件；界面不对先看 State，不再去 DOM 里找节点。</p></li>
+                    <li><h3>把更新写成新引用</h3><p>增删改一律先复制再改副本，连续更新用函数式更新，避免动作被覆盖。</p></li>
+                    <li><h3>把验证做成两条轨</h3><p>单测证明业务规则没被破坏，组件行为测试证明 UI 真的由 State 驱动。</p></li>
+                </ol>
+            </section>
+            <section class="sidebar-section">
+                <h2>个人主页</h2><p>课程代码与学习实践持续整理在 GitHub。</p>
+                <a href="https://github.com/kartwatt-cpu" target="_blank" rel="noopener noreferrer">kartwatt-cpu ↗（新窗口）</a>
+            </section>
+        </aside>
+    </main>
+    <footer><p>© 2026 王梓健 · 个人简历</p><p>持续学习，认真记录每一次实践。</p></footer>
+
+    <!-- Week 11: React 入口；index.html 只提供 #root，界面由 main.tsx 挂载 <TodoApp /> 生成。 -->
+    <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

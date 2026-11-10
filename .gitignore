@@ -1,0 +1,19 @@
+node_modules/
+dist/
+coverage/
+.vite/
+
+# 本地环境配置：只保留 .env.example，真实值不进 Git
+.env
+.env.local
+.env.*.local
+
+*.log
+.DS_Store
+Thumbs.db
+
+# 本地生成/校验脚本，不进提交
+_tools/
+
+# 本地原始截图，最终图已放到 docs/images/
+photo/

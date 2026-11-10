@@ -1,0 +1,78 @@
+/**
+ * 临时验证脚本（不随工程提交）：把第 11 周 PPT 第 27 页「第二关修复版」的写法
+ * 放回 React 里跑一遍，确认「只修引用、留着 innerHTML」到底会发生什么。
+ */
+import { useState } from 'react';
+import { beforeEach, expect, test } from 'vitest';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+
+beforeEach(() => cleanup());
+
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+function FakeTodoApp() {
+  const [todos, setTodos] = useState<Todo[]>([{ id: 1, text: '任务A', completed: false }]);
+
+  function handleAdd() {
+    const newTodo: Todo = { id: Date.now(), text: '任务B', completed: false };
+    const newTodos = [...todos, newTodo];
+    setTodos(newTodos);
+    const list = document.getElementById('todo-list');
+    if (list !== null) {
+      list.innerHTML += '<li>任务B</li>';
+    }
+  }
+
+  function handleToggle(id: number) {
+    todos.forEach((t) => {
+      if (t.id === id) {
+        t.completed = !t.completed; // 就地改
+      }
+    });
+    setTodos(todos); // 同一个引用
+  }
+
+  return (
+    <div>
+      <button onClick={handleAdd}>添加</button>
+      <ul id="todo-list">
+        {todos.map((todo) => (
+          <li key={todo.id} className={todo.completed ? 'done' : ''} onClick={() => handleToggle(todo.id)}>
+            {todo.text}
+          </li>
+        ))}
+      </ul>
+      <p data-testid="count">{todos.length}</p>
+    </div>
+  );
+}
+
+test('v1：setTodos 拿到同一个引用时，React 跳过更新，页面与数据脱节', () => {
+  render(<FakeTodoApp />);
+  const first = screen.getByText('任务A');
+  const before = first.closest('li')?.className;
+
+  fireEvent.click(first);
+
+  const after = screen.getByText('任务A').closest('li')?.className;
+  expect(after).toBe(before); // 页面没有变化
+});
+
+test('v1：innerHTML 手动插入的节点不受 React 管理，页面条目数比 State 多', () => {
+  render(<FakeTodoApp />);
+  const list = screen.getByRole('list');
+
+  fireEvent.click(screen.getByRole('button', { name: '添加' }));
+  // React 按 todos 渲染 2 条，手写 innerHTML 又追加 1 条 → 页面 3 条，State 只有 2 条。
+  expect(list.querySelectorAll('li')).toHaveLength(3);
+  expect(screen.getByTestId('count').textContent).toBe('2');
+  expect(Array.from(list.querySelectorAll('li')).map((li) => li.textContent)).toEqual([
+    '任务A',
+    '任务B',
+    '任务B',
+  ]);
+});
